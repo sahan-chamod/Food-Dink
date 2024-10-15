@@ -76,7 +76,7 @@ class LoginScreen extends StatelessWidget {
                 decoration: InputDecoration(
                   hintText: "Password",
                   filled: true,
-                  fillColor: kfillclor,
+                  fillColor: kfillcolor,
                   contentPadding: const EdgeInsets.symmetric(
                     vertical: 15,
                     horizontal: 20,
@@ -129,12 +129,12 @@ class LoginScreen extends StatelessWidget {
               const SizedBox(height: 10),
               _buildSocialButton(
                 label: "Connect with Facebook",
-                imagePath: "assests/Facebook.png",
+                imagePath: "assets/Facebook.png",
               ),
               const SizedBox(height: 10),
               _buildSocialButton(
                 label: "Connect with Google",
-                imagePath: "assests/Google.png",
+                imagePath: "assets/Google.png",
               ),
             ],
           ),

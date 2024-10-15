@@ -29,19 +29,19 @@ class _OnboardScreenState extends State<OnboardScreen> {
               },
               children: [
                 _buildPage(
-                  imagePath: 'assests/Group.png',
+                  imagePath: 'assets/Group.png',
                   title: "Diverse & sparkling food & drink.",
                   subtitle:
                       "We use the best local ingredients to create fresh and delicious food and drinks.",
                 ),
                 _buildPage(
-                  imagePath: 'assests/Frame.png',
+                  imagePath: 'assets/Frame.png',
                   title: "Free shipping on all orders",
                   subtitle:
                       "Free shipping on the primary order whilst the usage of CaPay fee method.",
                 ),
                 _buildPage(
-                  imagePath: 'assests/Frame2.png',
+                  imagePath: 'assets/Frame2.png',
                   title: "+24K Restaurants",
                   subtitle:
                       "Easily find your favorite food and have it delivered in record time.",
