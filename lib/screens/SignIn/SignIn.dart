@@ -8,7 +8,7 @@ class SignInScreen extends StatelessWidget {
         title: Text('Sign In'),
       ),
       body: const Center(
-        child: Text('This is the Sign In Screen'),
+        child: Text('Sign In Screen'),
       ),
     );
   }
