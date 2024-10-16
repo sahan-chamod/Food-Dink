@@ -1,224 +1,232 @@
 import 'package:flutter/material.dart';
+import 'package:foodanddrink/widget/constant.dart';
 
-class MyWidget extends StatefulWidget {
-  const MyWidget({super.key});
-
+class HomeScreen extends StatefulWidget {
   @override
-  State<MyWidget> createState() => _MyWidgetState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _MyWidgetState extends State<MyWidget> {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: HomeScreen(),
-      debugShowCheckedModeBanner: false,
-    );
-  }
-}
+class _HomeScreenState extends State<HomeScreen> {
+  List<String> addresses = [
+    '1014 Prospect Vall',
+    '789 Elm Street',
+    '456 Oak Avenue',
+    '321 Maple Road'
+  ];
+  String selectedAddress = '1014 Prospect Vall';
 
-class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         elevation: 0,
         title: TextField(
           decoration: InputDecoration(
-            prefixIcon: Icon(Icons.search),
-            hintText: 'Search on Goody',
+            hintText: "Search",
+            prefixIcon: const Icon(Icons.location_on, color: Colors.grey),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(15.0),
               borderSide: BorderSide.none,
             ),
             filled: true,
             fillColor: Colors.grey[200],
           ),
         ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.filter_list),
-            onPressed: () {},
-            color: Colors.orange,
-          ),
-        ],
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Category',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 10),
-            SizedBox(
-              height: 100,
-              child: PageView(
-                controller: PageController(viewportFraction: 0.3),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  CategoryItem(icon: Icons.fastfood, label: 'Sandwiches'),
-                  CategoryItem(icon: Icons.local_pizza, label: 'Pizza'),
-                  CategoryItem(icon: Icons.lunch_dining, label: 'Burgers'),
-                  CategoryItem(
-                      icon: Icons.emoji_food_beverage, label: 'Coffee'),
-                  CategoryItem(icon: Icons.ramen_dining, label: 'Ramen'),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Row(
+                        children: [
+                          Text(
+                            'Delivery to',
+                            style: TextStyle(
+                              color: Colors.orange,
+                              fontSize: 14,
+                            ),
+                          ),
+                          SizedBox(width: 4),
+                          Icon(Icons.location_on, color: Colors.red, size: 14),
+                        ],
+                      ),
+                      const SizedBox(height: 4),
+                      DropdownButton<String>(
+                        value: selectedAddress,
+                        icon: const Icon(Icons.arrow_drop_down,
+                            color: kmainbackgroundcolor),
+                        underline: const SizedBox(),
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                        items: addresses
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            selectedAddress = newValue!;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: IconButton(
+                          icon: const Icon(
+                            Icons.filter_alt,
+                            size: 20,
+                          ),
+                          color: Colors.grey,
+                          onPressed: () {},
+                        ),
+                      ),
+                      const Text(
+                        'filter',
+                        style: TextStyle(
+
+                          color: Colors.black,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
-            SizedBox(height: 20),
-            SectionTitle(title: 'Best Partners'),
-            SizedBox(height: 10),
-            SizedBox(
-              height: 160,
-              child: PageView(
-                controller: PageController(viewportFraction: 0.8),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  PartnerItem(imagePath: 'assets/subway.png', name: 'Subway'),
-                  PartnerItem(
-                      imagePath: 'assets/taco_bell.png', name: 'Taco Bell'),
-                  PartnerItem(
-                      imagePath: 'assets/McDonald.jpg', name: 'McDonald\'s'),
-                  PartnerItem(
-                      imagePath: 'assets/Starbucks.jpg', name: 'Starbucks'),
+                  const Text(
+                    'Best Partners',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: const Text(
+                      'See All',
+                      style:
+                          TextStyle(fontSize: 14, color: kmainbackgroundcolor),
+                    ),
+                  ),
                 ],
               ),
             ),
-            SizedBox(height: 20),
-            SectionTitle(title: 'Nearby'),
-            SizedBox(height: 10),
-            NearbyItem(
-              imagePath: 'assets/burger_king.png',
-              name: 'Burger King',
-              details: 'Burgers · Fast Food',
+            Container(
+              height: 180,
+              width: double.infinity,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  buildPartnerCard('Subway', 'assets/subway.png'),
+                  buildPartnerCard('Taco Bell', 'assets/taco_bell.png'),
+                  buildPartnerCard('Starbucks', 'assets/Starbucks.jpg'),
+                  buildPartnerCard('Subway', 'assets/subway.png'),
+                  buildPartnerCard('Taco Bell', 'assets/taco_bell.png'),
+                  buildPartnerCard('Starbucks', 'assets/Starbucks.jpg'),
+                  buildPartnerCard('Subway', 'assets/subway.png'),
+                  buildPartnerCard('Taco Bell', 'assets/taco_bell.png'),
+                  buildPartnerCard('Starbucks', 'assets/Starbucks.jpg'),
+                  buildPartnerCard('Subway', 'assets/subway.png'),
+                  buildPartnerCard('Taco Bell', 'assets/taco_bell.png'),
+                  buildPartnerCard('Starbucks', 'assets/Starbucks.jpg'),
+                ],
+              ),
             ),
-            NearbyItem(
-              imagePath: 'assets/kfc.png',
-              name: 'KFC',
-              details: 'Chicken · Fast Food',
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'More Restaurants',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: const Text(
+                      'See All',
+                      style:
+                          TextStyle(fontSize: 14, color: kmainbackgroundcolor),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            GridView.count(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              crossAxisCount: 2,
+              children: [
+                buildRestaurantCard('Burger King', 'assets/burger_king.png'),
+                buildRestaurantCard('Pizza Hut', 'assets/pizza_hut.jpg'),
+                buildRestaurantCard('McDonald\'s', 'assets/McDonald.jpg'),
+                buildPartnerCard('Taco Bell', 'assets/taco_bell.png'),
+              ],
             ),
           ],
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: [
+        items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(
               icon: Icon(Icons.favorite), label: 'Favorites'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
+        selectedItemColor: Colors.orange,
+        unselectedItemColor: Colors.grey,
       ),
     );
   }
-}
 
-class CategoryItem extends StatelessWidget {
-  final IconData icon;
-  final String label;
-
-  CategoryItem({required this.icon, required this.label});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CircleAvatar(
-          radius: 30,
-          backgroundColor: Colors.orange[100],
-          child: Icon(icon, color: Colors.orange, size: 30),
-        ),
-        SizedBox(height: 5),
-        Text(label),
-      ],
-    );
-  }
-}
-
-class SectionTitle extends StatelessWidget {
-  final String title;
-
-  SectionTitle({required this.title});
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      title,
-      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-    );
-  }
-}
-
-class PartnerItem extends StatelessWidget {
-  final String imagePath;
-  final String name;
-
-  PartnerItem({required this.imagePath, required this.name});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [BoxShadow(color: Colors.grey[300]!, blurRadius: 6)],
-      ),
+  Widget buildPartnerCard(String name, String imagePath) {
+    return Card(
+      margin: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(imagePath, height: 80),
-          SizedBox(height: 10),
-          Text(name, style: TextStyle(fontWeight: FontWeight.bold)),
-          Text("Fast Food"),
+          Image.asset(imagePath, width: 100, height: 100),
+          const SizedBox(height: 10),
+          Text(name),
         ],
       ),
     );
   }
-}
 
-class NearbyItem extends StatelessWidget {
-  final String imagePath;
-  final String name;
-  final String details;
-
-  NearbyItem(
-      {required this.imagePath, required this.name, required this.details});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [BoxShadow(color: Colors.grey[300]!, blurRadius: 6)],
-      ),
-      child: Row(
+  Widget buildRestaurantCard(String name, String imagePath) {
+    return Card(
+      margin: const EdgeInsets.all(8.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(imagePath, height: 80, width: 80),
-          SizedBox(width: 10),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(name,
-                    style:
-                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                Text(details, style: TextStyle(color: Colors.grey)),
-                Row(
-                  children: [
-                    Icon(Icons.star, color: Colors.orange, size: 16),
-                    Text('4.2'),
-                    Spacer(),
-                    Text('Free Order', style: TextStyle(color: Colors.green)),
-                  ],
-                ),
-              ],
-            ),
-          ),
+          Image.asset(imagePath, width: 100, height: 100),
+          const SizedBox(height: 10),
+          Text(name),
         ],
       ),
     );

@@ -74,6 +74,7 @@ flutter:
     - assets/burger_king.png  
     - assets/McDonald.jpg 
     - assets/Starbucks.jpg  
+    - assets/pizza_hut.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
