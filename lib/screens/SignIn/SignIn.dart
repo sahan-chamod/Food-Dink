@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 
-class SignInScreen extends StatelessWidget {
+class SignInScreen extends StatefulWidget {
+  const SignInScreen({super.key});
+
+  @override
+  State<SignInScreen> createState() => _ForgetpasswordState();
+}
+
+class _ForgetpasswordState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Sign In'),
-      ),
-      body: const Center(
-        child: Text('Sign In Screen'),
+    return const Scaffold(
+      backgroundColor: Colors.white,
+      body: Center(
+        child: Text('this is the sign screen'),
       ),
     );
   }
