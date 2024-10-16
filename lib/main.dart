@@ -3,6 +3,7 @@ import 'package:foodanddrink/screens/Login/LoginScreen.dart';
 import 'package:foodanddrink/screens/onboard/OnboardScreen.dart';
 import 'package:foodanddrink/screens/Forgetpassword/ForgetPassword.dart';
 import 'package:foodanddrink/screens/SignIn/SignIn.dart';
+import 'package:foodanddrink/screens/Users/HomeScreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,7 +26,8 @@ class MyApp extends StatelessWidget {
         '/': (context) => const OnboardScreen(),
         '/login': (context) => const LoginScreen(),
         '/forgot_password': (context) => const ForgetPassword(),
-        '/signin': (context) => SignInScreen(),
+        '/signin': (context) => const SignInScreen(),
+        '/home': (context) => HomeScreen(),
       },
     );
   }
