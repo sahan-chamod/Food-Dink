@@ -20,7 +20,7 @@ class LoginScreen extends StatelessWidget {
                   CircleAvatar(
                     radius: 50,
                     backgroundColor: kbackgroundcolor,
-                    child: Icon(
+                    child: const Icon(
                       Icons.restaurant_menu,
                       size: 50,
                       color: kmainbackgroundcolor,
