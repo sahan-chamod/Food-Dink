@@ -48,11 +48,22 @@ class LoginScreen extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               const Text(
-                "Hello Jos, sign in to continue!\nOr Create new account",
+                "Hello Jos, sign in to continue!",
                 style: TextStyle(
                   color: Colors.grey,
                 ),
                 textAlign: TextAlign.center,
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, '/signin');
+                },
+                child: const Text(
+                  "Create new account",
+                  style: TextStyle(
+                    color: kmainbackgroundcolor,
+                  ),
+                ),
               ),
               const SizedBox(height: 20),
               TextField(
