@@ -105,7 +105,7 @@ class LoginScreen extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     // Navigate to home page after login
-                    // Navigator.pushNamed(context, '/home');
+                    Navigator.pushNamed(context, '/home');
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: kmainbackgroundcolor,
